@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = [];
+        answer = arr.filter((str, i) => i === arr.indexOf(str));
+        return answer;
+      }
+      let str = ["good", "time", "good", "time", "student"];
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
+<!-- ! -->
+<!-- filter: 콜백함수의 리턴값이 true인 요소만 뽑아서 배열화한다. -->

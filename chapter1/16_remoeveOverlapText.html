@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution2(s) {
+        let answer = "";
+        for (let txt of s) {
+          if (!answer.includes(txt)) answer += txt;
+        }
+        return answer;
+      }
+      function solution(s) {
+        let answer = "";
+        for (let i = 0; i < s.length; i++) {
+          console.log(i, s.indexOf(s[i]));
+          if (i === s.indexOf(s[i])) answer += s[i];
+        }
+        return answer;
+      }
+      function solution3(str, txt) {
+        let answer = 0;
+        let pos = str.indexOf(txt);
+
+        while (pos !== -1) {
+          answer++;
+          pos = str.indexOf(txt, pos + 1);
+        }
+        return answer;
+      }
+      console.log(solution("ksekkset"));
+      console.log(solution3("ksekkset", "s"));
+    </script>
+  </body>
+</html>
+
+<!-- ! -->
+<!-- indexOf로 특정 문자 갯수 찾기 해보기 -->

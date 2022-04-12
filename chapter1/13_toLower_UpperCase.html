@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution2(s) {
+        let answer = "";
+        for (let txt of s) {
+          let num = txt.charCodeAt();
+          if (num >= 65 && num <= 90) answer += String.fromCharCode(num + 32);
+          else if (num >= 97 && num <= 122)
+            answer += String.fromCharCode(num - 32);
+        }
+
+        return answer;
+      }
+      function solution(s) {
+        let answer = "";
+        for (let txt of s) {
+          if (txt === txt.toUpperCase()) answer += txt.toLowerCase();
+          else answer += txt.toUpperCase();
+        }
+
+        return answer;
+      }
+
+      console.log(solution("MisTer"));
+    </script>
+  </body>
+</html>

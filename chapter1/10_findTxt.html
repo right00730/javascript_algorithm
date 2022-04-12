@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(str, t) {
+        let answer;
+        answer = str.split(t).length - 1;
+        return answer;
+      }
+      function solution2(str, t) {
+        let answer = 0;
+        for (let txt of str) {
+          if (txt === t) answer++;
+        }
+        return answer;
+      }
+      function solution3(str, t) {
+        let answer;
+        let count;
+
+        let regexp = new RegExp(t, "g");
+        count = str.matchAll(regexp);
+        answer = Array.from(count).length;
+        return answer;
+      }
+
+      let str = "COMPUTERPROGRAMMING";
+      console.log(solution3(str, "R"));
+    </script>
+  </body>
+</html>
+<!-- ! -->
+<!-- 1. split을 사용할 때 대상문자가 마지막자리에 있어도 자동으로 빈 스트링이 생성된다. "TEST".split("T") => ["ES",""]
+    2. 문자열을 정규표현식으로 변환할때 RegExp 생성자를 사용한다. 글로벌 변수는 인자 두번째 자리에 지정한다.
+-->

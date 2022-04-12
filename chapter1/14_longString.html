@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer;
+        let max = "";
+        for (let str of arr) {
+          if (str.length > max.length) max = str;
+        }
+        answer = max;
+        return answer;
+      }
+      let str = ["teacher", "time", "studentsss", "beautiful", "good"];
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

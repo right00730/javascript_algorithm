@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s) {
+        let answer;
+        let idx = Math.floor(s.length / 2);
+        if (s.length % 2 === 0) answer = s.substring(idx - 1, idx + 1);
+        else answer = s.substring(idx, idx + 1);
+        return answer;
+      }
+      console.log(solution("study"));
+    </script>
+  </body>
+</html>
+
+<!-- ! -->
+<!-- 
+  subString(start, end) 
+  : start지점부터 end인덱스 앞까지 문자열을 추출한다. (end 미포함)
+  
+  substr(start,count)
+ :  start지점부터  count개의  문자열을 추출한다.
+-->
