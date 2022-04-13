@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      //   function solution(arr) {
+      //     let sorted = [...arr].sort((a, b) => b - a);
+      //     let answer = [];
+      //     for (let i = 0; i < arr.length; i++) {
+      //       let rank = sorted.indexOf(arr[i]);
+      //       answer.push(rank + 1);
+      //     }
+      //     return answer;
+      //   }
+      function solution(arr) {
+        let n = arr.length;
+        let answer = new Array(n);
+        answer.fill(1);
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            if (arr[i] < arr[j]) answer[i]++;
+          }
+        }
+        return answer;
+      }
+      let arr = [89, 92, 89, 100, 76];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+<!-- !  -->
+<!-- 등수, 보다 큰 수등을 찾을때는 기존 배열의 원소하나씩을 기준으로 삼아 전체 배열을 대상으로 for문을 돌린다. 
+배열을 초기화할때 Array.from({length:n} , ()=> default_value )과 같이  초기화가 가능하다.
+-->

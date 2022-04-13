@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = 0;
+        let n = arr.length;
+        let dx = [-1, 0, 1, 0];
+        let dy = [0, 1, 0, -1];
+        for (let i = 0; i < n; i++) {
+          target: for (let j = 0; j < n; j++) {
+            for (let k = 0; k < df.length; k++) {
+              let x = i + dx[k];
+              let y = j + dy[k];
+              if (x >= 0 && x < n && y >= 0 && y < n && arr[x][y] >= arr[i][j])
+                continue target;
+            }
+            answer++;
+          }
+        }
+        return answer;
+      }
+
+      let arr = [
+        [2, 3, 7, 2, 3],
+        [3, 7, 1, 6, 1],
+        [7, 2, 5, 3, 4],
+        [4, 3, 6, 4, 1],
+        [8, 7, 3, 5, 2],
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+
+<!-- 봉우리 -->
+<!-- 각 경우마다(좌표마다) 이동해야할 거리 4방향을 미리 배열화 해두고 각 경우 for문을 돌리면서 이동해야할 거리 4방향을 각각 for문을 돌리면서
+방향중 하나라도 조건 중 하나라도 부정이 된다면  다음 경우(좌표)로 넘어간다. 
+ 각 모서리는 0이라고 가장하며 해당 방향은 항상 통과할 수 있는 방향이 된다.(해당 방향을 제외한 나머지 3방향에 따라 경우의 true여부를 결정)
+-->
