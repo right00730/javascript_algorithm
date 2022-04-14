@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution2(s) {
+        let answer = "YES";
+        s = s.toUpperCase();
+        let leng = s.length;
+        let n = Math.floor(s.length / 2);
+
+        for (let i = 0; i < n; i++) {
+          if (s[i] != s[leng - 1 - i]) {
+            console.log(s[i], s[leng - 1 - i]);
+            answer = "NO";
+            break;
+          }
+        }
+        return answer;
+      }
+      function solution(s) {
+        let answer = "YES";
+        let leng = s.length;
+        let n = Math.floor(s.length / 2);
+        s = s.toUpperCase();
+        let reverse = s.split("").reverse().join("");
+        if (reverse !== s) return "NO";
+        return answer;
+      }
+
+      let str = "gooG";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
