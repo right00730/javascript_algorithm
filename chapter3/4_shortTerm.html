@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, t) {
+        let answer = [];
+        // 1. front
+        let idx = 1000;
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] === t) {
+            idx = 0;
+            answer.push(idx);
+          } else {
+            idx++;
+            answer.push(idx);
+          }
+        }
+        // 2. back
+        idx = 1000;
+        for (let j = s.length - 1; j > -1; j--) {
+          if (s[j] === t) {
+            idx = 0;
+          } else {
+            idx++;
+            answer[j] = Math.min(answer[j], idx);
+          }
+        }
+        return answer;
+      }
+
+      let str = "teachermode";
+      console.log(solution(str, "e"));
+    </script>
+  </body>
+</html>
+
+<!-- 다시풀기 -->
