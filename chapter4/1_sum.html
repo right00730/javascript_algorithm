@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution2(arr) {
+        let answer;
+        let max = 0;
+        for (let num of arr) {
+          let sum = num
+            .toString()
+            .split("")
+            .reduce((a, b) => a + Number(b), 0);
+          if (max < sum) {
+            max = sum;
+            answer = num;
+          } else if (max === sum) {
+            answer = Math.max(answer, num);
+          }
+        }
+        return answer;
+      }
+      function solution2(arr) {
+        let answer;
+        let max = 0;
+        for (let num of arr) {
+          let sum = 0;
+          let tmp = num;
+          while (tmp > 0) {
+            sum += tmp % 10;
+            tmp = Math.floor(tmp / 10);
+          }
+          if (max < sum) {
+            max = sum;
+            answer = num;
+          } else if (max === sum) {
+            answer = Math.max(answer, num);
+          }
+        }
+
+        return answer;
+      }
+      console.log("result : ", solution2([128, 460, 603, 1244, 521, 137, 123]));
+    </script>
+  </body>
+</html>
