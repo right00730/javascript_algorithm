@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea style="width: 200px; height: 60px" id="area"></textarea>
+    <script>
+      // function solution(list) {
+      //   let answer = 0;
+      //   let answerList = [];
+      //   let students = list[0][0];
+      //   let money = list[0][1];
+      //   let sum = 0;
+      //   list.shift();
+      //   list = list.sort((a, b) => {
+      //     return a[0] + a[1] - (b[1] + b[1]);
+      //   });
+      //   for (let i = 0; i < list.length; i++) {
+      //     if (sum + list[i][0] + list[i][1] < money) {
+      //       sum += list[i][0] + list[i][1];
+      //       answerList.push(list[i]);
+      //     } else if (sum + list[i][0] / 2 + list[i][1] <= money) {
+      //       sum += list[i][0] / 2 + list[i][1];
+      //       answerList.push(list[i]);
+      //       break;
+      //     } else {
+      //       continue;
+      //     }
+      //   }
+      //   answer = answerList.length;
+      //   return answer;
+      // }
+      function solution(list) {
+        let answer = 0;
+        let answerList = [];
+        let students = list[0][0];
+        let budget = list[0][1];
+        list.shift();
+        list = list.sort((a, b) => {
+          return a[0] + a[1] - (b[1] + b[1]);
+        });
+        for (let i = 0; i < list.length; i++) {
+          let sum = 0;
+          let cnt = 0;
+          sum += list[i][0] / 2 + list[i][1];
+          cnt++;
+
+          for (let j = 0; j < list.length; j++) {
+            if (i !== j) {
+              if (sum + list[j][1] + list[j][0] > budget) break;
+
+              if (sum + list[j][1] + list[j][0] <= budget) {
+                sum += list[j][1] + list[j][0];
+                cnt++;
+              } else continue;
+            }
+          }
+
+          if (answer < cnt) answer = cnt;
+        }
+        return answer;
+      }
+
+      console.log(
+        solution([
+          [5, 28],
+          [6, 6],
+          [2, 2],
+          [4, 3],
+          [4, 5],
+          [10, 3],
+        ])
+      );
+    </script>
+  </body>
+</html>
