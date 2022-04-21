@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>출결</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, str) {
+        let answer = "";
+        let arr = str.split("");
+        let map = new Map();
+        let max = 0;
+        for (let i = 0; i < arr.length; i++) {
+          if (map.has(arr[i])) {
+            map.set(arr[i], map.get(arr[i]) + 1);
+          } else map.set(arr[i], 1);
+        }
+        for (let [key, val] of map) {
+          if (max < val) {
+            answer = key;
+            max = val;
+          }
+        }
+        return answer;
+      }
+      console.log(solution(15, "BACBACCACCBDEDE"));
+    </script>
+  </body>
+</html>
