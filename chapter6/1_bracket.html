@@ -1,0 +1,64 @@
+괄호가 입력되면 올바른 괄호이면 “YES", 올바르지 않으면 ”NO"를 출력합니다. (())()
+이것은 괄호의 쌍이 올바르게 위치하는 거지만, (()()))은 올바른 괄호가 아니다. ▣
+입력설명 첫 번째 줄에 괄호 문자열이 입력됩니다. 문자열의 최대 길이는 30이다. ▣
+출력설명 첫 번째 줄에 YES, NO를 출력한다. ▣ 입력예제 1 (()(()))(() ▣ 출력예제 1
+NO [자바스크립트 알고리즘 문제풀이]
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution2(branckets) {
+        //1. ㅂㅐ여ㄹ에 순서대로 담는다.
+        // 2.담다가 이전값과 다른 값이 나오면 pop한다
+        //pop하다가 다른값이 나왔는데 lengtha가 있으면 out
+        let stack = new Array();
+        stack.push(branckets[0]);
+        let rt = 1;
+        let lt = 0;
+        while (rt < branckets.length) {
+          console.log(rt, lt);
+          if (stack.length && branckets[rt] !== stack[lt]) {
+            while (stack.length) {
+              console.log("inenr ", stack);
+              if (stack[stack.length - 1] === branckets[rt]) return "NO";
+              else {
+                stack.pop();
+                rt++;
+                lt--;
+              }
+            }
+          } else {
+            stack.push(branckets[rt++]);
+            lt++;
+          }
+        }
+        if (stack.length) return "NO";
+        return "YES";
+      }
+      function solution(branckets) {
+        let answer = "YES";
+        let stack = new Array();
+
+        for (let i = 0; i < branckets.length; i++) {
+          if (branckets[i] == "(") {
+            stack.push(branckets[i]);
+          } else {
+            if (stack.length) stack.pop();
+            else return "NO";
+          }
+        }
+        if (stack.length) return "NO";
+        return "YES";
+      }
+      console.log(solution("(())()"));
+      console.log(solution("()(()))(()"));
+    </script>
+  </body>
+</html>
