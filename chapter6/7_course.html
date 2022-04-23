@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>교육과정 설계</title>
+  </head>
+  <body>
+    <script>
+      function solution(must, subjects) {
+        let queue = [];
+        let answer = "YES";
+        for (let m of must) {
+          queue.push(m);
+        }
+
+        for (let subj of subjects) {
+          if (queue.includes(subj)) {
+            if (subj !== queue.shift()) return "NO";
+          }
+        }
+        if (queue.length > 0) return "NO";
+        return answer;
+      }
+      let must = "CAB";
+      let selected = "CAA";
+      console.log(solution(must, selected));
+    </script>
+  </body>
+</html>

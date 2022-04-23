@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공주구하기</title>
+  </head>
+  <body>
+    <script>
+      function solution2(n, k) {
+        let count = 1;
+        let flag = 0;
+        let prince = Array.from({ length: 8 }, () => (count = count + 1));
+        console.log(prince);
+        let rt = 0;
+        while (rt < prince.length) {
+          let tar = rt;
+          for (let i = 0; i < tar + k - 1; i++) {
+            let tmp = prince[rt++];
+            prince.push(tmp);
+          }
+          rt++;
+          flag++;
+          console.log(prince, rt);
+
+          if (flag > 30) break;
+        }
+      }
+
+      function solution(n, k) {
+        let answer = "";
+        let count = 0;
+        let prince = Array.from({ length: 8 }, (v, i) => i + 1);
+        while (prince.length !== 0) {
+          for (let i = 0; i < k - 1; i++) {
+            prince.push(prince.shift());
+          }
+          prince.shift();
+          if (prince.length === 1) {
+            answer = prince.shift();
+            break;
+          }
+        }
+        return answer;
+      }
+
+      console.log(solution(8, 3));
+    </script>
+  </body>
+</html>

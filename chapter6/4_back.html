@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>후위식 연산</title>
+  </head>
+  <body>
+    <script>
+      function solution(str) {
+        let answer = 0;
+        let stack = [];
+        for (let x of str) {
+          if (!isNaN(x)) {
+            stack.push(Number(x));
+          } else {
+            let rt = stack.pop();
+            let lt = stack.pop();
+            stack.push(operator(x, lt, rt));
+          }
+        }
+        answer = stack[0];
+        return answer;
+      }
+
+      // let str = "352+*9-";
+      let str = "4512111/++";
+
+      console.log(solution(str));
+      function operator(oper, operand1, operand2) {
+        switch (oper) {
+          case "+":
+            return operand1 + operand2;
+          case "-":
+            return operand1 - operand2;
+          case "*":
+            return operand1 * operand2;
+          case "/":
+            return operand1 / operand2;
+          default:
+            return operand1;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>후위식 연산</title>
+  </head>
+  <body>
+    <script>
+      function solution2(str) {
+        let answer = 0;
+        let stack = [];
+        for (let i = 0; i < str.length; i++) {
+          if (str[i] === "(" && str[i + 1] === ")") {
+            answer += stack.length;
+          } else if (str[i] === ")" && str[i - 1] !== "(") {
+            stack.pop();
+          } else if (str[i] === "(") {
+            stack.push("(");
+            answer += 1;
+          }
+        }
+        return answer;
+      }
+      function solution(str) {
+        let answer = 0;
+        let stack = [];
+        for (let i = 0; i < str.length; i++) {
+          if (str[i] === "(") {
+            stack.push("(");
+          } else if (str[i] === ")" && str[i - 1] === "(") {
+            stack.pop();
+            answer += stack.length;
+          } else if (str[i] === ")" && str[i - 1] !== "(") {
+            stack.pop();
+            answer += 1;
+          }
+        }
+        return answer;
+      }
+
+      let a = "(((()(()()))(())()))(()())";
+
+      console.log(solution(a));
+    </script>
+  </body>
+</html>
