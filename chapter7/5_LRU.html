@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Least Recently Used</title>
+  </head>
+  <body>
+    <script>
+      function solution(s, n, nums) {
+        let answer;
+        let memory = Array.from({ length: s }, () => 0);
+
+        nums.forEach((num) => {
+          let idx = -1;
+          for (let i = 0; i < memory.length; i++) {
+            if (memory[i] === num) {
+              idx = i;
+              break;
+            }
+          }
+
+          if (idx === -1) {
+            for (let j = memory.length - 1; j >= 1; j--) {
+              memory[j] = memory[j - 1];
+            }
+          } else {
+            for (let j = idx; j >= 1; j--) {
+              memory[j] = memory[j - 1];
+            }
+          }
+          memory[0] = num;
+        });
+
+        answer = memory;
+        return answer;
+      }
+
+      function solution(s, n, nums) {
+        let answer;
+        let memory = Array.from({ length: s }, () => 0);
+
+        nums.forEach((num) => {
+          let pos = -1;
+          for (let i = 0; i < memory.length; i++) {
+            if (memory[i] === num) {
+              pos = i;
+              break;
+            }
+          }
+
+          if (pos === -1) {
+            memory.pop();
+            memory.unshift(num);
+          } else {
+            memory.splice(pos, 1);
+            memory.unshift(num);
+          }
+        });
+
+        answer = memory;
+        return answer;
+      }
+
+      let s = 5;
+      let nums = [, 2, 3, 2, 6, 2, 3, 5, 7];
+      let n = nums.length;
+      console.log(" 결과 : ", solution(s, n, nums));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>버블정렬</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = [];
+        //  처음 원소부터 뒤에원소랑 비교, 뒤에 원소가 더 작으면 교환.
+        // 다시 다음요소부터 뒤에원소랑 비교. 마지막에 도달하면 다시 처음 원소부터 검사
+        for (let i = 0; i < arr.length - 1; i++) {
+          for (let j = 0; j < arr.length - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+              [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+          }
+        }
+        answer = arr;
+        return answer;
+      }
+      let arr = [13, 5, 11, 7, 23, 16];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
+<!-- N개이 숫자가 입력되면 오름차순으로 정렬하여 출력하는 프로그램을 작성하세요. 정렬하는 방법은 버블정렬입니다.
+▣ 입력설명
+첫 번째 줄에 자연수 N(1<=N<=100)이 주어집니다.
+두 번째 줄에 N개의 자연수가 공백을 사이에 두고 입력됩니다. 각 자연수는 정수형 범위 안에 있습니다.
+▣ 출력설명
+오름차순으로 정렬된 수열을 출력합니다.
+▣ 입력예제 1
+6
+13 5 11 7 23 15
+▣ 출력예제 1
+5 7 11 13 15 23 -->
+13 5 11 7 23 15 5 11 7 13 15 23 5 7 11 13 15 23
