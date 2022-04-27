@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(m, songs) {
+        let rt = 0;
+        let lt = Number.MIN_SAFE_INTEGER;
+        let answer = rt;
+
+        for (let x of songs) {
+          if (x > lt) lt = x;
+          rt += x;
+        }
+        while (rt >= lt) {
+          let mid = Math.floor((lt + rt) / 2);
+          console.log(mid);
+
+          if (isPossible(songs, mid) <= m) {
+            answer = mid;
+            rt = mid - 1;
+          } else {
+            lt = mid + 1;
+          }
+        }
+        return answer;
+      }
+      function isPossible(songs, mid) {
+        let sum = 0;
+        let count = 1;
+        for (let x of songs) {
+          console.log(`mid : ${mid} , sun : ${sum}, count : ${count}`);
+
+          if (sum + x > mid) {
+            count += 1;
+            sum = x;
+          } else sum += x;
+        }
+        console.log("c", count);
+        return count;
+      }
+
+      let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>
