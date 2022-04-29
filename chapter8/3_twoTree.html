@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fu</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        let answer1 = "";
+        let answer2 = "";
+        let answer3 = "";
+
+        function DFS_F(n) {
+          if (n > 7) return;
+          answer1 += n;
+          console.log(n);
+          DFS_F(n * 2);
+          DFS_F(n * 2 + 1);
+        }
+        function DFS_M(n) {
+          if (n > 7) return;
+          DFS_M(n * 2);
+          answer2 += n;
+          DFS_M(n * 2 + 1);
+        }
+        function DFS_B(n) {
+          if (n > 7) return;
+          DFS_B(n * 2);
+          DFS_B(n * 2 + 1);
+          answer3 += n;
+        }
+        DFS_F(n);
+
+        DFS_M(n);
+        DFS_B(n);
+
+        return answer1 + " , " + answer2 + " , " + answer3;
+      }
+      console.log(solution(1));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        console.log(recursive(n));
+      }
+      function recursive(n) {
+        if (n === 1) return String(n);
+        else return recursive(n - 1) + String(n);
+      }
+
+      solution(3);
+    </script>
+  </body>
+</html>

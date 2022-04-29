@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(k, coords) {
+        let answer = 0;
+        coords.sort((a, b) => a - b);
+
+        let lt = Number.MAX_SAFE_INTEGER;
+        for (let i = 0; i < coords.length - 1; i++) {
+          if (coords[i + 1] - coords[i] < lt) lt = coords[i + 1] - coords[i];
+        }
+
+        let rt = coords[coords.length - 1] - coords[0];
+        while (rt >= lt) {
+          // while (false) {
+          let mid = Math.floor((lt + rt) / 2);
+          if (count(coords, mid) >= k) {
+            answer = mid;
+            lt = mid + 1;
+          } else {
+            rt = mid - 1;
+          }
+        }
+        return answer;
+      }
+      function count(coords, mid) {
+        let currnt = coords[0];
+        let cnt = 1;
+        for (let coord of coords) {
+          if (coord - currnt >= mid) {
+            currnt = coord;
+            cnt++;
+          }
+        }
+        return cnt;
+      }
+      let arr = [1, 2, 8, 4, 9];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>
