@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>최대점수</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, endt, ps, pt) {
+        let anwser = 0;
+        function DFS(L, score, time) {
+          if (time > endt) return;
+          if (L > n - 1) {
+            console.log(score, time);
+            anwser = Math.max(score, anwser);
+            return;
+          } else {
+            DFS(L + 1, score + ps[L], time + pt[L]);
+            DFS(L + 1, score, time);
+          }
+        }
+        DFS(0, 0, 0);
+        return anwser;
+      }
+      let ps = [10, 25, 15, 6, 7];
+      let pt = [5, 12, 8, 3, 4];
+      console.log(solution(ps.length, 20, ps, pt));
+    </script>
+  </body>
+</html>

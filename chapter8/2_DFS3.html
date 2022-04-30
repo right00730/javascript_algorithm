@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>부분집합2</title>
+  </head>
+  <body>
+    <script>
+      function solution(k, arr) {
+        let answer = 0;
+        let n = arr.length;
+        arr.sort((a, b) => a - b);
+
+        function DFS(d, sum) {
+          if (sum > k) return;
+          if (d > n - 1) {
+            answer = Math.max(sum, answer);
+
+            // check!
+          } else {
+            DFS(d + 1, sum + arr[d]);
+            DFS(d + 1, sum);
+          }
+        }
+        DFS(0, 0);
+        return answer;
+      }
+      let arr = [81, 58, 42, 33, 61];
+      console.log(solution(259, arr));
+    </script>
+  </body>
+</html>
