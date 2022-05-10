@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        let answer = 0;
+
+        function DFS(n) {
+          if (n === 1) return n;
+          else {
+            return n * DFS(n - 1);
+          }
+        }
+        answer = DFS(n);
+        return answer;
+      }
+
+      console.log(solution(5));
+    </script>
+  </body>
+</html>

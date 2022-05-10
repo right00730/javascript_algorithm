@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>수열</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, f) {
+        let answer = [];
+        let pc = Array.from({ length: n + 1 }, () => Array(n + 1));
+        let coeff = Array.from({ length: n }, () => 0);
+        let tempArr = Array.from({ length: n }, () => 0);
+        let used = Array.from({ length: n }, () => false);
+
+        function combi(n, r) {
+          if (pc[n][r] > 0) return pc[n][r];
+          if (n === r || r === 0) return 1;
+          else {
+            return (pc[n][r] = combi(n - 1, r - 1) + combi(n - 1, r));
+          }
+        }
+        function DFS(L, sum) {
+          if (n === L && sum === 16) {
+            answer.push(tempArr.slice(0));
+          } else {
+            for (let i = 0; i < n; i++) {
+              if (!used[i]) {
+                used[i] = true;
+                tempArr[L] = i + 1;
+
+                DFS(L + 1, sum + (i + 1) * coeff[L]);
+
+                used[i] = false;
+              }
+            }
+          }
+        }
+
+        for (let i = 0; i < n; i++) {
+          coeff[i] = combi(n - 1, i);
+        }
+        DFS(0, 0);
+        return answer;
+      }
+      console.log(solution(4, 16));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, m) {
+        let answer = [];
+        let tempAnswer = Array.from({ length: m }, () => 0);
+
+        function combination(D, k) {
+          if (D === m) {
+            answer.push(tempAnswer.join(" "));
+          } else {
+            for (let i = k; i <= n; i++) {
+              tempAnswer[D] = i;
+              combination(D + 1, i + 1);
+            }
+          }
+        }
+        combination(0, 1);
+        return answer;
+      }
+
+      console.log(solution(4, 2));
+    </script>
+  </body>
+</html>
