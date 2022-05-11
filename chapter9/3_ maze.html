@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(arr) {
+        let answer = 0;
+        let n = arr.length;
+        let dx = [-1, 0, 1, 0];
+        let dy = [0, 1, 0, -1];
+
+        let temp = [];
+
+        function DFS(r, c) {
+          if (r === 6 && c === 6) {
+            console.log(temp);
+            answer++;
+          } else {
+            for (let i = 0; i < dx.length; i++) {
+              const nx = r + dx[i];
+              const ny = c + dy[i];
+              if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[nx][ny] === 0) {
+                arr[nx][ny] = 1;
+                temp.push(`${r + dx[i]}, ${c + dy[i]}`);
+                DFS(nx, ny);
+                temp.pop();
+                arr[nx][ny] = 0;
+              }
+            }
+          }
+        }
+        arr[0][0] = 1;
+        temp.push(`0,0`);
+        DFS(0, 0);
+
+        return answer;
+      }
+
+      let arr = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [1, 1, 0, 1, 0, 1, 1],
+        [1, 1, 0, 0, 0, 0, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

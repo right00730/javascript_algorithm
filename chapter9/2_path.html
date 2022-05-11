@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function solution(n, arr) {
+        let answer = [];
+        let adj = {};
+        let ch = Array.from({ length: n + 1 }, () => false);
+        let temp = [];
+        for (let [a, b] of arr) {
+          adj[a] = [];
+        }
+        for (let [a, b] of arr) {
+          adj[a].push(b);
+        }
+        console.log(adj);
+        function DFS(v) {
+          if (v === 5) {
+            answer.push(temp.slice());
+          } else {
+            for (let i = 0; i < adj[v].length; i++) {
+              if (!ch[adj[v][i]]) {
+                ch[adj[v][i]] = true;
+                temp.push(adj[v][i]);
+                DFS(adj[v][i]);
+                temp.pop();
+                ch[adj[v][i]] = false;
+              }
+            }
+          }
+        }
+        temp.push(1);
+        ch[1] = true;
+        DFS(1);
+
+        return answer;
+      }
+      let arr = [
+        [1, 2],
+        [1, 3],
+        [1, 4],
+        [2, 1],
+        [2, 3],
+        [2, 5],
+        [3, 4],
+        [4, 2],
+        [4, 5],
+      ];
+      console.log(solution(5, arr));
+    </script>
+  </body>
+</html>
