@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>아일랜드 log</title>
+  </head>
+  <body>
+    <script>
+      //   function solution(arr) {
+      //     const n = arr.length;
+      //     let answer = 0;
+      //     const coords = arr.map((coord) => {
+      //       return coord.split("").map((x) => Number(x));
+      //     });
+      //     const dx = [-1, -1, 0, 1, 1, 1, 0, -1];
+      //     const dy = [0, 1, 1, 1, 0, -1, -1, -1];
+      //     function DFS(x, y) {
+      //       for (let i = 0; i < dx.length; i++) {
+      //         let nx = x + dx[i];
+      //         let ny = y + dy[i];
+      //         if (
+      //           nx >= 0 &&
+      //           nx < n &&
+      //           ny >= 0 &&
+      //           ny < n &&
+      //           coords[nx][ny] === 1
+      //         ) {
+      //           coords[nx][ny] = 0;
+
+      //           DFS(nx, ny);
+      //         }
+      //       }
+      //     }
+      //     for (let i = 0; i < arr.length; i++) {
+      //       for (let j = 0; j < arr.length; j++) {
+      //         if (coords[i][j]) {
+      //           coords[i][j] = 0;
+      //           answer++;
+      //           console.log(i, j);
+
+      //           DFS(i, j);
+      //         }
+      //       }
+      //     }
+      //     return answer;
+      //   }
+
+      function solution(arr) {
+        const n = arr.length;
+        let answer = 0;
+        const coords = arr.map((coord) => {
+          return coord.split("").map((x) => Number(x));
+        });
+        const dx = [-1, -1, 0, 1, 1, 1, 0, -1];
+        const dy = [0, 1, 1, 1, 0, -1, -1, -1];
+        let queue = [];
+
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = 0; j < arr.length; j++) {
+            if (coords[i][j]) {
+              coords[i][j] = 0;
+
+              queue.push([i, j]);
+              answer++;
+              while (queue.length) {
+                console.log(queue.slice());
+
+                const [x, y] = queue.shift();
+                // console.log(x, y);
+
+                for (let i = 0; i < dx.length; i++) {
+                  const nx = x + dx[i];
+                  const ny = y + dy[i];
+
+                  if (
+                    nx >= 0 &&
+                    nx < n &&
+                    ny >= 0 &&
+                    ny < n &&
+                    coords[nx][ny] === 1
+                  ) {
+                    coords[nx][ny] = 0;
+                    queue.push([nx, ny]);
+                  }
+                }
+              }
+              //   console.log("count ent======");
+            }
+          }
+        }
+        return answer;
+      }
+
+      const arr = [
+        "1100010",
+        "0110110",
+        "0100000",
+        "0001011",
+        "1101100",
+        "1000100",
+        "1010100",
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

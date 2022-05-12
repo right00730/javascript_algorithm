@@ -1,0 +1,71 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cow log</title>
+  </head>
+  <body>
+    <script>
+      function solution(S, E) {
+        let answer = 0;
+        let queue = [];
+        let move = Array.from({ length: 10001 }, () => 0);
+        queue.push(S);
+        move[S] = 0;
+        while (queue.length !== 0) {
+          const c = queue.shift();
+          if (c === E) break;
+
+          for (let x of [c + 1, c - 1, c + 5]) {
+            if (x === E) return move[c] + 1;
+            if (x >= 1 && x <= 10000 && move[x] === 0) {
+              queue.push(x);
+              move[x] = move[c] + 1;
+            }
+          }
+        }
+        return answer;
+      }
+
+      console.log(solution(8, 3));
+    </script>
+  </body>
+</html> -->
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      function solution(S, E) {
+        let answer = -1;
+        let queue = [];
+        let L = 0;
+        let ch = Array.from({ length: 100001 }, () => false);
+        queue.push(S);
+        while (queue.length) {
+          let len = queue.length;
+          for (let i = 0; i < len; i++) {
+            const c = queue.shift();
+            for (let x of [c + 1, c - 1, c + 5]) {
+              if (x === E) return L + 1;
+              else if (x >= 1 && x <= 10000 && !ch[x]) {
+                ch[x] = true;
+                queue.push(x);
+              }
+            }
+          }
+          L++;
+        }
+
+        return answer;
+      }
+
+      console.log(solution(8, 3));
+    </script>
+  </body>
+</html>
