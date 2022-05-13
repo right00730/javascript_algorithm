@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>다리건너기</title>
+  </head>
+  <body>
+    <script>
+      function solution(n) {
+        let target = n + 1;
+        let answer = 0;
+        let proc = Array.from({ length: target + 1 }, () => 0);
+        proc[1] = 1;
+        proc[2] = 2;
+        for (let i = 3; i <= target; i++) {
+          proc[i] = proc[i - 1] + proc[i - 2];
+        }
+        return (answer = proc[target]);
+      }
+      console.log(solution(7));
+    </script>
+  </body>
+</html>
