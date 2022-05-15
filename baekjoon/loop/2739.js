@@ -1,0 +1,19 @@
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let input = [];
+rl.on("line", function (line) {
+  input = parseInt(line);
+  rl.close();
+}).on("close", () => {
+  solution(input);
+});
+
+function solution(n) {
+  for (let i = 1; i < 10; i++) {
+    console.log(n + " * " + i + " = " + n * i);
+  }
+}
