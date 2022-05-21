@@ -1,3 +1,5 @@
+// easy
+
 function solution(arr, func) {
   if (arr.length === 0) return false;
   else {

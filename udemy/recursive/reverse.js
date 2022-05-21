@@ -1,3 +1,5 @@
+// easy
+
 function reverse(str) {
   if (str.length === 1) return str;
   else {
