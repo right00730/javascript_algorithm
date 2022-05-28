@@ -7,7 +7,7 @@ let input = [];
 rl.on("line", function (line) {
   input.push(Number(line));
 }).on("close", function () {
-  console.log(bubbleSort(input));
+  console.log(insertSort(input.slice(1)));
 
   //   console.log(selectSort(input));
   process.exit();
@@ -51,4 +51,19 @@ function swap(arr, idx1, idx2) {
   let temp = arr[idx1];
   arr[idx1] = arr[idx2];
   arr[idx2] = temp;
+}
+
+function insertSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let current = arr[i];
+    let j = i - 1;
+    for (j; j >= 0; j--) {
+      if (arr[j] > current) {
+        arr[j + 1] = arr[j];
+      } else break;
+    }
+
+    arr[j + 1] = current;
+  }
+  return arr.join("\n");
 }

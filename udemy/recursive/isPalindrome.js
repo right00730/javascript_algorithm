@@ -1,5 +1,6 @@
 // 회문찾기
 // 복습 다시풀기
+// 팰린드롬
 function isPalindrome(text) {
   let answer = false;
   function DFS(str) {
