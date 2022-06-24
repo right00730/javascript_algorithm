@@ -1,58 +1,25 @@
-const { chownSync } = require("fs");
-const readline = require("readline");
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-let input = [];
-rl.on("line", function (line) {
-  input = line;
-  rl.close();
-});
-rl.on("close", function () {
-  const [N, K] = input.split(" ").map((x) => +x);
-  console.log(solution(N, K));
-  process.exit();
-});
-
-function solution(N, K) {
-  let answer = 0;
-  let dp = Array.from({ length: N + 1 }, () =>
-    Array.from({ length: N }, () => 0)
-  );
-
-  function combination(n, k) {
-    if (dp[n][k]) {
-      return dp[n][k];
-    }
-    if (n === k || k === 0) {
-      return (dp[n][k] = 1);
-    } else {
-      for (let i = 1; i <= n; i++) {
-        for (let j = 0; j <= n; j++) {}
-      }
-      dp[n][k] = combination(n - 1, k - 1) + combination(n - 1, k);
-      console.log(dp[n][k]);
-      return dp[n][k];
-    }
+/**
+ * @param {string[]} words
+ * @param {number} k
+ * @return {string[]}
+ */
+var topKFrequent = function (words, k) {
+  let lookup = {};
+  let answer = [];
+  for (let word of words) {
+    lookup[word] = (lookup[word] || 0) + 1;
   }
-  answer = combination(N, K);
-  return answer;
-}
-// function combination(N, K) {
-//   let dp = Array.from({ length: N + 1 }, () =>
-//     Array.from({ length: N + 1 }, () => 0)
-//   );
 
-//   for (let i = 1; i <= N; i++) {
-//     for (let j = 0; j <= i; j++) {
-//       if (j === i || j === 0) dp[i][j] = 1 % 10007;
-//       else {
-//         dp[i][j] =
-//           ((dp[i - 1][j - 1] % 10007) + (dp[i - 1][j] % 10007)) % 10007;
-//       }
-//     }
-//   }
-//   return dp[N][K];
-// }
+  // 정렬시 다른 빈도수라면 내림차순, 같은 빈도수라면 오름차순 정렬해야한다
+  // 같은 문자열로 시작하는 경우 charCodeAt이 같으므로 b>a 즉 대소비교로 처리한다.
+  // return 값이 < 0이면 오름차순 정렬이므로 b > a ? -1 : 1 로 b가 크면 오름차순되도록 처리한다
+  answer = Object.keys(lookup).sort((a, b) => {
+    if (lookup[a] === lookup[b]) {
+      if (a.charCodeAt() === b.charCodeAt()) return b > a ? -1 : 1;
+      else return a.charCodeAt() - b.charCodeAt();
+    } else {
+      return lookup[b] - lookup[a];
+    }
+  });
+  return answer.slice(0, k);
+};
