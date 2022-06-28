@@ -11,7 +11,6 @@ function solution(progresses, speeds) {
     let counter = 1;
 
     let current = lastDays.shift();
-    let idx = 0;
     while (lastDays.length > 0) {
       if (lastDays[0] <= current) {
         counter++;
