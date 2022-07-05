@@ -1,23 +1,75 @@
 function solution(jobs) {
   var answer = 0;
-  //작업시간 = 실제 시작시간+ 소요 시간 - 요청 시작시간
-  // 소요시간과 로딩시작시간은 고정이므로 실제 시작시간이 작을수록 유리 = 빨리끝나는것부터 선택
+  let len = jobs.length;
 
-  // + 요청시작 시간을 고려해야함.
-  jobs.sort((a, b) => a[1] + a[0] - (b[1] + b[0]));
-  //   마지막 작업 종료시간 + 소요시간 + 실제 시작시간
-  let lastEndTime = jobs[0][0];
+  let jobsTemp = jobs;
+  jobsTemp.sort((a, b) => {
+    if (a[0] === b[0]) return a[1] - b[1];
+    return a[0] - b[0];
+  });
+  let lastTime = 0;
+  let queue = [];
 
-  for (let job of jobs) {
-    console.log("select target", job);
+  while (jobsTemp.length || queue.length) {
+    if (jobsTemp.length && lastTime >= jobsTemp[0][0]) {
+      const target = jobsTemp.shift();
+      queue.push(target);
+      queue.sort((a, b) => a[1] - b[1]);
+      continue;
+    }
 
-    console.log("start time", lastEndTime);
-    answer += lastEndTime + job[1] - job[0];
-    lastEndTime += job[1];
-    console.log("current time", answer);
+    if (queue.length) {
+      const task = queue.shift();
+      lastTime = lastTime + task[1];
+      answer = answer + lastTime - task[0];
+    } else {
+      const task = jobsTemp.shift();
+      lastTime = task[0] + task[1];
+      answer = answer + task[1];
+    }
   }
-  answer = Math.floor(answer / 3);
+
+  answer = Math.floor(answer / len);
   return answer;
 }
+let arr = [
+  [24, 10],
+  [28, 39],
+  [43, 20],
+  [37, 5],
+  [47, 22],
+  [20, 47],
+  [15, 34],
+  [15, 2],
+  [35, 43],
+  [26, 1],
+];
+const solution2 = (jobs) => {
+  let answer = 0,
+    j = 0,
+    time = 0;
+  jobs.sort((a, b) => {
+    return a[0] - b[0];
+  });
 
-//3 + 3+6-2 + 9+ 9 -1
+  const priorityQueue = [];
+  while (j < jobs.length || priorityQueue.length !== 0) {
+    if (jobs.length > j && time >= jobs[j][0]) {
+      priorityQueue.push(jobs[j++]);
+      priorityQueue.sort((a, b) => {
+        return a[1] - b[1];
+      });
+      continue;
+    }
+    if (priorityQueue.length !== 0) {
+      time += priorityQueue[0][1];
+      answer += time - priorityQueue[0][0];
+      priorityQueue.shift();
+    } else {
+      time = jobs[j][0];
+    }
+    console.log(time);
+  }
+  return parseInt(answer / jobs.length);
+};
+console.log(solution(arr));
