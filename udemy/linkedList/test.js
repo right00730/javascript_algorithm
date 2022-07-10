@@ -28,14 +28,25 @@ class SinglyLinkedList {
     if (val === 0) return this.head;
 
     if (val > 0) {
+      // let temp = this.head;
+      // this.head = this.head.next;
+      // this.tail.next = temp;
+      // this.tail = temp;
+      // temp.next = null;
+
       for (let i = 0; i < val; i++) {
         let head = this.head;
         this.head = this.head.next;
         this.tail.next = head;
         this.tail = head;
-        this.tail = null;
+        this.tail.next = null;
       }
     } else {
+      // let lastNode = this.pop();
+      // let temp = this.head;
+      // this.head = lastNode;
+      // this.head.next = temp;
+
       for (let i = 0; i > val; i--) {
         const last = this.pop();
         last.next = this.head;
