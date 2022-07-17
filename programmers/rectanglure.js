@@ -1,5 +1,5 @@
 //멀쩡한 사각형
-//level : 1
+//level : 2
 
 // 사각형의 대각선 지나는 단위 사각형 공식을 활용
 function solution(w, h) {
@@ -26,7 +26,7 @@ function isGcd(a, b) {
 //대각선 하단의 정사각형들도 구해야하므로 최종적으로 * 2를 한다.
 function solution(w, h) {
   var answer = 0;
-  //대각선을 지나는 사각형의 갯수 공식 = w + h - (w,h의 최대 공약수)
+  //slope = 기울기
   let slope = h / w;
   let underLine = 0;
   for (let i = 1; i <= w; i++) {
