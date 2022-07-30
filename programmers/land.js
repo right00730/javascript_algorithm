@@ -20,8 +20,9 @@ function solution1(land) {
 
   return answer;
 }
-
-function solution(land) {
+// 테스트  20초대 실행
+//효율성 테스트 시간초과
+function solution2(land) {
   var answer = 0;
   let len = land.length;
   let dp = Array.from({ length: len }, () => 0);
@@ -35,17 +36,14 @@ function solution(land) {
         dp[j] = land[i][j];
       }
     } else {
-      let max = Math.max.apply(null, land[i]);
-      let idx = land[i].indexOf(max);
-      let nextMax = land[i].slice().sort((a, b) => a - b)[1];
-
-      console.log(max, idx, nextMax);
-
+      let max = Math.max.apply(null, dp);
+      let idx = dp.indexOf(max);
+      let nextMax = dp.slice().sort((a, b) => b - a)[1];
       for (let j = 0; j < 4; j++) {
         if (j !== idx) {
-          dp[j] = dp[j] + max;
+          dp[j] = land[i][j] + max;
         } else {
-          dp[j] = dp[j] + nextMax;
+          dp[j] = land[i][j] + nextMax;
         }
       }
     }
@@ -53,11 +51,36 @@ function solution(land) {
   answer = Math.max.apply(null, dp);
   return answer;
 }
+
+//테스트케이스 0초대,
+//효율성 개선.  20초대
+function solution(land) {
+  var answer = 0;
+  let log = land.slice();
+  let len = land.length;
+  let dp = Array.from({ length: len }, () => 0);
+
+  //행 순회
+  for (let i = 1; i < land.length; i++) {
+    let max = Math.max(...log[i - 1]);
+    let idx = log[i - 1].indexOf(max);
+    let next = 0;
+    for (let j = 0; j < 4; j++) {
+      if (j !== idx) {
+        log[i][j] += max;
+        if (next < log[i - 1][j]) next = log[i - 1][j];
+      }
+    }
+    log[i][idx] += next;
+  }
+  answer = Math.max(...log[log.length - 1]);
+  return answer;
+}
 console.log(
   solution([
-    [1, 1, 1, 1],
-    [2, 2, 2, 3],
-    [3, 3, 3, 6],
-    [4, 4, 4, 7],
+    [4, 3, 2, 1],
+    [2, 2, 2, 1],
+    [6, 6, 6, 4],
+    [8, 7, 6, 5],
   ])
 );
