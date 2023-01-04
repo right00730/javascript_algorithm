@@ -1,4 +1,4 @@
-function solution(value) {}
+function solution(values) {}
 
 let requestValue = "";
 console.log(solution(requestValue));
