@@ -1,7 +1,10 @@
-function solution1_5(num) {
-  let answer = 0;
-  for (let i = 1; i <= num; i++) {
-    answer += i;
+function solution1_6(values) {
+  let min = Number.MAX_SAFE_INTEGER;
+
+  for (let i = 0; i < values.length; i++) {
+    if (min > values[i]) {
+      min = values[i];
+    }
   }
-  return answer;
+  return min;
 }
