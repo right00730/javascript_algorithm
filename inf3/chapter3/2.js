@@ -1,3 +1,6 @@
+//회원  === 팰린드롬
+
+//Case 1. use for loop
 function solution(str) {
   let answer = "YES";
   let lowerStr = str
@@ -14,6 +17,8 @@ function solution(str) {
 
   return answer;
 }
+
+//Case 2. use reverse
 
 function solution2(str) {
   const lowerStr = str.toLowerCase().replace(/[^a-z]/g, "");

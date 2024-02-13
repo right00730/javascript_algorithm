@@ -1,3 +1,6 @@
+//회원  === 팰린드롬
+
+//Case 1. use two-pointer
 function solution(s) {
   let answer = "YES";
   const str = s.toUpperCase();
@@ -15,6 +18,7 @@ function solution(s) {
   return answer;
 }
 
+//Case 2. use for loop
 function solution2(s) {
   let answer = "YES";
   const str = s.toUpperCase();
