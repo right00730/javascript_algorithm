@@ -1,37 +1,45 @@
-//회원  === 팰린드롬
-
-//Case 1. use two-pointer
-function solution(s) {
-  let answer = "YES";
-  const str = s.toUpperCase();
-  let lpt = 0;
-  let rpt = s.length - 1;
-
-  while (lpt <= rpt) {
-    if (str[lpt] !== str[rpt]) {
-      return "NO";
+function solution(edges) {
+  var answer = [0, 0, 0, 0];
+  const { vertex, edgeBoards } = findAddVertex(edges);
+  const total = edgeBoards[vertex][1];
+  answer[0] = vertex;
+  for (let i = 1; i < edgeBoards.length; i++) {
+    if (i === vertex) continue;
+    if (edgeBoards[i][1] === 0) {
+      answer[2]++;
     }
-    lpt++;
-    rpt--;
+    if (edgeBoards[i][0] >= 2) {
+      answer[3]++;
+    }
   }
+  answer[1] = total - answer[2] - answer[3];
 
   return answer;
 }
 
-//Case 2. use for loop
-function solution2(s) {
-  let answer = "YES";
-  const str = s.toUpperCase();
-  const len = s.length;
+const findAddVertex = (edges) => {
+  const edgeBoards = [[0, 0]];
 
-  for (let i = 0; i < Math.floor(len / 2); i++) {
-    if (str[i] !== str[len - 1 - i]) {
-      return "NO";
+  for (let edge of edges) {
+    const [o, i] = edge;
+    if (!edgeBoards[i]) {
+      edgeBoards[i] = [0, 0];
+    }
+    if (!edgeBoards[o]) {
+      edgeBoards[o] = [0, 0];
+    }
+    edgeBoards[i][0]++;
+    edgeBoards[o][1]++;
+  }
+
+  const vertex = edgeBoards.findIndex((edgeItem, i) => edgeItem[0] === 0 && edgeItem[1] > 1);
+
+  for (let edge of edges) {
+    const [o, i] = edge;
+    if (String(o) === String(vertex)) {
+      edgeBoards[i][0]--;
     }
   }
 
-  return answer;
-}
-
-let str = "godgoG";
-console.log(solution(str));
+  return { vertex, edgeBoards };
+};
