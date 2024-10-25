@@ -38,45 +38,28 @@ function solution2(s, t) {
   const originMap = new Map();
   const sMap = new Map();
 
-  for (let char of s.slice(0, 3)) {
-    if (sMap.has(char)) {
-      sMap.set(char, sMap.get(char) + 1);
-    } else {
-      sMap.set(char, 1);
-    }
+  for (let i = 0; i < t.length - 1; i++) {
+    sMap.set(s[i], (sMap.get(s[i]) || 0) + 1);
   }
+
   for (let char of t) {
-    if (originMap.has(char)) {
-      originMap.set(char, originMap.get(char) + 1);
-    } else {
-      originMap.set(char, 1);
-    }
+    originMap.set(char, (originMap.get(char) || 0) + 1);
   }
-  //while loop when rt reach at end
-  let lt = 0;
-  let rt = t.length - 1;
+
+  let left = 0;
   let cnt = 0;
 
-  while (rt < s.length) {
-    if (compareMaps(sMap, originMap)) {
-      console.log(`ping : `, sMap, originMap);
-      cnt++;
-    } else {
-      console.log(`fail : `, sMap, originMap);
-    }
-    if (sMap.get(s[lt]) > 1) {
-      sMap.set(s[lt], sMap.get(s[lt]) - 1);
-    } else {
-      sMap.delete(s[lt]);
-    }
+  for (let right = t.length - 1; right < s.length; right++) {
+    // Add the new character to the window
+    sMap.set(s[right], (sMap.get(s[right]) || 0) + 1);
 
-    lt++;
-    rt++;
-    if (sMap.has(s[rt])) {
-      sMap.set(s[rt], sMap.get(s[rt]) + 1);
-    } else {
-      sMap.set(s[rt], 1);
-    }
+    // Check if current window matches the targetMap
+    if (compareMaps(sMap, originMap)) cnt++;
+
+    // Remove the leftmost character from the window
+    sMap.set(s[left], sMap.get(s[left]) - 1);
+    if (sMap.get(s[left]) === 0) sMap.delete(s[left]);
+    left++;
   }
 
   return cnt;
@@ -90,6 +73,7 @@ function compareMaps(map1, map2) {
     if (!map2.has(key)) return false;
     if (map2.get(key) !== value) return false;
   }
+  console.log("hit!@");
   return true;
 }
 
